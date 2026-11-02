@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101114">
+  <title>NAVER Minimal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="search-area" aria-label="네이버 검색">
+      <div class="clock" id="clock">00:00</div>
+      <div class="date" id="date"></div>
+      <form class="search-form" id="searchForm" action="https://search.naver.com/search.naver" method="get">
+        <label class="sr-only" for="query">네이버 검색어</label>
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path>
+        </svg>
+        <input id="query" name="query" type="search" placeholder="검색어를 입력하세요"
+               autocomplete="off" spellcheck="false" autofocus>
+        <button class="clear-button" id="clearButton" type="button" aria-label="검색어 지우기" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+      </form>
+      <div class="hint"><kbd>Enter</kbd><span>검색</span></div>
+    </section>
+    <footer class="footer">SEARCH SIMPLY.</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

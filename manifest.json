@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "NAVER Minimal",
+  "version": "1.0.0",
+  "description": "네이버 메인 페이지를 미니멀 검색 화면으로 바꿉니다.",
+  "permissions": [
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "https://www.naver.com/*",
+    "https://naver.com/*"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "naver_home_redirect",
+        "enabled": true,
+        "path": "rules/redirect_rules.json"
+      }
+    ]
+  }
+}
