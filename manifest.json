@@ -1,14 +1,15 @@
 {
   "manifest_version": 3,
   "name": "NAVER Minimal",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "네이버 메인 페이지를 미니멀 검색 화면으로 바꿉니다.",
   "permissions": [
     "declarativeNetRequest"
   ],
   "host_permissions": [
     "https://www.naver.com/*",
-    "https://naver.com/*"
+    "https://naver.com/*",
+    "https://api.open-meteo.com/*"
   ],
   "declarative_net_request": {
     "rule_resources": [
