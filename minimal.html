@@ -7,7 +7,55 @@
   <title>NAVER Minimal</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="background: var(--bg);" id="bodyElement">
+  <!-- 설정 패널 -->
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-header">
+      <h2 id="settingsTitle">Settings</h2>
+      <button class="settings-close" id="settingsClose" aria-label="Close settings">✕</button>
+    </div>
+
+    <div class="settings-section">
+      <label id="langLabel">Language</label>
+      <div class="language-buttons">
+        <button class="lang-btn" data-lang="ko">한국어</button>
+        <button class="lang-btn" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="ja">日本語</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <label id="bgColorLabel">Background Color</label>
+      <input type="color" id="bgColorInput" class="color-input">
+    </div>
+
+    <div class="settings-section">
+      <label id="bgOpacityLabel">Background Opacity</label>
+      <div class="opacity-control">
+        <input type="range" id="bgOpacitySlider" class="opacity-slider" min="0" max="100" value="100">
+        <span id="opacityValue" class="opacity-value">100%</span>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <label id="bgImageLabel">Background Image</label>
+      <input type="file" id="bgImageInput" class="file-input" accept="image/*">
+      <button class="btn-clear-bg" id="clearBgBtn" type="button" aria-label="Clear background image">Clear Image</button>
+    </div>
+  </div>
+
+  <!-- 설정 버튼들 (우측 상단) -->
+  <div class="settings-controls">
+    <button class="control-btn" id="settingsToggle" aria-label="Open settings" title="Settings">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="1.5" fill="currentColor"></circle>
+        <circle cx="19" cy="12" r="1.5" fill="currentColor"></circle>
+        <circle cx="5" cy="12" r="1.5" fill="currentColor"></circle>
+      </svg>
+    </button>
+  </div>
+
   <main class="page">
     <section class="search-area" aria-label="네이버 검색">
       <div class="clock" id="clock">00:00</div>
@@ -24,6 +72,8 @@
           <span class="weather-city" id="weatherCity"></span>
         </a>
       </div>
+
+      <div class="daily-message" id="dailyMessage"></div>
 
       <form class="search-form" id="searchForm" action="https://search.naver.com/search.naver" method="get">
         <label class="sr-only" for="query">네이버 검색어</label>

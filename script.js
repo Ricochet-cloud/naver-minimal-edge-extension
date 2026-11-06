@@ -1,7 +1,185 @@
+/* =========================================================
+   i18n (국제화) 시스템
+   ========================================================= */
+
+const i18n = {
+  ko: {
+    settings: "설정",
+    language: "언어",
+    bgColor: "배경색",
+    bgOpacity: "배경 투명도",
+    bgImage: "배경 이미지",
+    clearImage: "이미지 제거",
+    weather: "날씨",
+    enterSearch: "검색",
+    mail: "메일",
+    cafe: "카페",
+    blog: "블로그",
+    mybox: "MYBOX",
+    shopping: "쇼핑",
+    news: "뉴스",
+    map: "지도",
+    webtoon: "웹툰",
+    dailyMessages: [
+      "오늘도 화이팅! 당신은 충분히 잘하고 있어요.",
+      "새로운 하루가 시작됐어요. 긍정적으로 즐겨봐요!",
+      "작은 노력이 모여 큰 성공을 이룬답니다.",
+      "오늘의 도전을 두려워하지 마세요.",
+      "당신의 노력은 절대 헛되지 않습니다.",
+      "행복한 하루를 위해 미소를 지어봐요.",
+      "오늘도 최선을 다하는 당신을 응원해요!",
+      "힘들 땐 한 걸음씩 천천히 나아가도 괜찮아요.",
+      "당신은 더 큰 것을 이룰 수 있는 사람이에요.",
+      "매일이 새로운 기회이고 새로운 시작이에요.",
+      "오늘의 작은 성취도 축하할 가치가 있어요.",
+      "당신의 노력과 시간은 소중합니다.",
+      "어제보다 오늘이 더 나을 거예요!",
+      "이 순간도 당신을 성장시키고 있습니다.",
+      "긍정의 마음으로 하루를 시작해봐요.",
+      "당신의 꿈은 반드시 이루어질 거예요.",
+      "오늘 하루도 소중하니까 즐겨봐요!",
+      "힘내요! 당신은 충분히 훌륭합니다.",
+      "모든 일이 잘되길 바랄게요!",
+      "오늘도 함께 응원하고 있습니다!",
+    ]
+  },
+  en: {
+    settings: "Settings",
+    language: "Language",
+    bgColor: "Background Color",
+    bgOpacity: "Background Opacity",
+    bgImage: "Background Image",
+    clearImage: "Clear Image",
+    weather: "Weather",
+    enterSearch: "Search",
+    mail: "Mail",
+    cafe: "Cafe",
+    blog: "Blog",
+    mybox: "MYBOX",
+    shopping: "Shopping",
+    news: "News",
+    map: "Map",
+    webtoon: "Webtoon",
+    dailyMessages: [
+      "You're doing great today! Keep it up!",
+      "A new day has begun. Enjoy it with positivity!",
+      "Small efforts lead to big success.",
+      "Don't be afraid of today's challenges.",
+      "Your efforts are never wasted.",
+      "Smile and enjoy your day!",
+      "You're doing amazing! I'm rooting for you!",
+      "When it's hard, take one step at a time.",
+      "You can achieve great things.",
+      "Every day is a new opportunity and fresh start.",
+      "Even small achievements today deserve celebration.",
+      "Your time and effort are precious.",
+      "Today will be better than yesterday!",
+      "This moment is helping you grow.",
+      "Start your day with a positive mind.",
+      "Your dreams will surely come true.",
+      "Make today count and enjoy it!",
+      "Stay strong! You're more than enough.",
+      "I hope everything goes well for you!",
+      "Keep going! I'm cheering for you!",
+    ]
+  },
+  ja: {
+    settings: "設定",
+    language: "言語",
+    bgColor: "背景色",
+    bgOpacity: "背景の透明度",
+    bgImage: "背景画像",
+    clearImage: "画像を削除",
+    weather: "天気",
+    enterSearch: "検索",
+    mail: "メール",
+    cafe: "カフェ",
+    blog: "ブログ",
+    mybox: "MYBOX",
+    shopping: "ショッピング",
+    news: "ニュース",
+    map: "マップ",
+    webtoon: "ウェブトゥーン",
+    dailyMessages: [
+      "今日も頑張ってください！素晴らしい一日になります。",
+      "新しい一日が始まりました。楽しく過ごしましょう！",
+      "小さな努力が大きな成功につながります。",
+      "今日の挑戦を恐れないでください。",
+      "あなたの努力は決して無駄ではありません。",
+      "笑顔で素敵な一日を過ごしましょう！",
+      "あなたは十分に素晴らしい人です。応援しています！",
+      "辛い時は一歩ずつ進みましょう。",
+      "あなたはもっと大きなことを成し遂げられます。",
+      "毎日が新しい機会と新しい始まりです。",
+      "今日の小さな成功も祝う価値があります。",
+      "あなたの時間と努力は貴重です。",
+      "昨日より今日がもっと良い一日になります！",
+      "この瞬間もあなたを成長させています。",
+      "ポジティブな気持ちで一日を始めましょう。",
+      "あなたの夢は必ず実現します。",
+      "今日も大切にして楽しんでください！",
+      "頑張ってください！あなたは十分です。",
+      "すべてが上手くいくことを願っています！",
+      "応援しています。頑張ってください！",
+    ]
+  },
+  zh: {
+    settings: "设置",
+    language: "语言",
+    bgColor: "背景颜色",
+    bgOpacity: "背景不透明度",
+    bgImage: "背景图像",
+    clearImage: "清除图像",
+    weather: "天气",
+    enterSearch: "搜索",
+    mail: "邮件",
+    cafe: "咖啡馆",
+    blog: "博客",
+    mybox: "MYBOX",
+    shopping: "购物",
+    news: "新闻",
+    map: "地图",
+    webtoon: "网络漫画",
+    dailyMessages: [
+      "今天也要加油！你正在做得很好。",
+      "新的一天开始了。让我们积极地享受它！",
+      "小小的努力会积累成大的成功。",
+      "不要害怕今天的挑战。",
+      "你的努力永远不会白费。",
+      "微笑面对美好的一天吧。",
+      "你在做得很好！我为你加油！",
+      "困难时可以慢慢前进。",
+      "你能成就更大的事情。",
+      "每一天都是新的机会和新的开始。",
+      "今天的小成就也值得庆祝。",
+      "你的时间和努力都很珍贵。",
+      "今天会比昨天更美好！",
+      "这一刻也在帮助你成长。",
+      "用积极的心态开始新的一天。",
+      "你的梦想一定会实现。",
+      "今天也要好好珍惜和享受！",
+      "加油！你已经够好了。",
+      "希望一切顺利！",
+      "我在为你加油！继续努力！",
+    ]
+  }
+};
+
+/* =========================================================
+   현재 언어 및 UI 요소 선택
+   ========================================================= */
+
+let currentLanguage = localStorage.getItem("naver_minimal_lang") || "ko";
+
+function t(key) {
+  return i18n[currentLanguage]?.[key] || i18n.ko[key] || key;
+}
+
 const clockElement = document.getElementById("clock");
 const dateElement = document.getElementById("date");
 const queryInput = document.getElementById("query");
 const clearButton = document.getElementById("clearButton");
+const dailyMessageElement = document.getElementById("dailyMessage");
 
 const weatherBadge = document.getElementById("weatherBadge");
 const weatherIcon = document.getElementById("weatherIcon");
@@ -9,16 +187,215 @@ const weatherTemp = document.getElementById("weatherTemp");
 const weatherDesc = document.getElementById("weatherDesc");
 const weatherCity = document.getElementById("weatherCity");
 
-const weekdays = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+const settingsPanel = document.getElementById("settingsPanel");
+const settingsToggle = document.getElementById("settingsToggle");
+const settingsClose = document.getElementById("settingsClose");
+const langButtons = document.querySelectorAll(".lang-btn");
+const bgColorInput = document.getElementById("bgColorInput");
+const bgOpacitySlider = document.getElementById("bgOpacitySlider");
+const opacityValue = document.getElementById("opacityValue");
+const bgImageInput = document.getElementById("bgImageInput");
+const clearBgBtn = document.getElementById("clearBgBtn");
+const bodyElement = document.getElementById("bodyElement");
+
+const weekdays = {
+  ko: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+  en: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  ja: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],
+  zh: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
+};
+
+/* =========================================================
+   시간 및 날짜 업데이트
+   ========================================================= */
+
+function getDateString(date, lang) {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const dayName = weekdays[lang][date.getDay()];
+
+  if (lang === "ko") {
+    return `${year}년 ${month}월 ${day}일 ${dayName}`;
+  } else if (lang === "en") {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"];
+    return `${monthNames[date.getMonth()]} ${day}, ${year} ${dayName}`;
+  } else if (lang === "ja") {
+    return `${year}年${month}月${day}日 ${dayName}`;
+  } else if (lang === "zh") {
+    return `${year}年${month}月${day}日 ${dayName}`;
+  }
+  return "";
+}
 
 function updateDateTime() {
   const now = new Date();
-  clockElement.textContent = new Intl.DateTimeFormat("ko-KR", {
+  clockElement.textContent = new Intl.DateTimeFormat(currentLanguage === "ko" ? "ko-KR" :
+    currentLanguage === "en" ? "en-US" :
+    currentLanguage === "ja" ? "ja-JP" : "zh-CN", {
     hour: "2-digit", minute: "2-digit", hour12: false
   }).format(now);
-  dateElement.textContent =
-    `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일 ${weekdays[now.getDay()]}`;
+  dateElement.textContent = getDateString(now, currentLanguage);
 }
+
+/* =========================================================
+   하루 응원문구 (하루에 한 번만)
+   ========================================================= */
+
+function getDailyMessage() {
+  const today = new Date().toDateString();
+  const cached = localStorage.getItem("naver_minimal_message_date");
+  const cachedMessage = localStorage.getItem("naver_minimal_message");
+
+  if (cached === today && cachedMessage) {
+    return cachedMessage;
+  }
+
+  const messages = i18n[currentLanguage].dailyMessages;
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+  localStorage.setItem("naver_minimal_message_date", today);
+  localStorage.setItem("naver_minimal_message", randomMessage);
+
+  return randomMessage;
+}
+
+function updateDailyMessage() {
+  const message = getDailyMessage();
+  dailyMessageElement.textContent = message;
+}
+
+/* =========================================================
+   언어 변경
+   ========================================================= */
+
+function setLanguage(lang) {
+  currentLanguage = lang;
+  localStorage.setItem("naver_minimal_lang", lang);
+
+  // 활성 버튼 표시
+  langButtons.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.lang === lang);
+  });
+
+  // UI 텍스트 업데이트
+  document.getElementById("settingsTitle").textContent = t("settings");
+  document.getElementById("langLabel").textContent = t("language");
+  document.getElementById("bgColorLabel").textContent = t("bgColor");
+  document.getElementById("bgOpacityLabel").textContent = t("bgOpacity");
+  document.getElementById("bgImageLabel").textContent = t("bgImage");
+  clearBgBtn.textContent = t("clearImage");
+  clearButton.setAttribute("aria-label", `${t("clearImage")} ${t("enterSearch").toLowerCase()}`);
+  settingsToggle.setAttribute("aria-label", t("settings"));
+
+  // 서비스 링크 라벨 업데이트
+  const serviceLinks = document.querySelectorAll(".service-item");
+  const services = ["mail", "cafe", "blog", "mybox", "shopping", "news", "map", "webtoon"];
+  serviceLinks.forEach((link, i) => {
+    if (i < services.length) {
+      const name = link.querySelector(".service-name");
+      if (name) name.textContent = t(services[i]);
+    }
+  });
+
+  // 날짜 및 응원문구 업데이트
+  updateDateTime();
+
+  // 언어 변경 시 응원문구 캐시 초기화해서 새 언어의 메시지 선택
+  localStorage.removeItem("naver_minimal_message");
+  updateDailyMessage();
+}
+
+langButtons.forEach(btn => {
+  btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+});
+
+/* =========================================================
+   배경화면 커스텀
+   ========================================================= */
+
+function loadBackgroundSettings() {
+  const bgColor = localStorage.getItem("naver_minimal_bg_color") || "#101114";
+  const bgOpacity = localStorage.getItem("naver_minimal_bg_opacity") || "100";
+  const bgImageBase64 = localStorage.getItem("naver_minimal_bg_image");
+
+  bgColorInput.value = bgColor;
+  bgOpacitySlider.value = bgOpacity;
+  opacityValue.textContent = `${bgOpacity}%`;
+
+  applyBackgroundSettings(bgColor, bgOpacity, bgImageBase64);
+}
+
+function applyBackgroundSettings(bgColor, bgOpacity, bgImageBase64) {
+  const opacity = parseInt(bgOpacity) / 100;
+  bodyElement.style.background = bgColor;
+
+  if (bgImageBase64) {
+    bodyElement.style.backgroundImage = `url(${bgImageBase64})`;
+    bodyElement.style.backgroundSize = "cover";
+    bodyElement.style.backgroundPosition = "center";
+    bodyElement.style.backgroundAttachment = "fixed";
+    document.documentElement.style.setProperty("--bg-overlay", `rgba(16, 17, 20, ${1 - opacity})`);
+  } else {
+    bodyElement.style.backgroundImage = "none";
+    document.documentElement.style.setProperty("--bg-overlay", "transparent");
+  }
+}
+
+bgColorInput.addEventListener("change", (e) => {
+  const color = e.target.value;
+  localStorage.setItem("naver_minimal_bg_color", color);
+  applyBackgroundSettings(color, bgOpacitySlider.value, localStorage.getItem("naver_minimal_bg_image"));
+});
+
+bgOpacitySlider.addEventListener("input", (e) => {
+  const opacity = e.target.value;
+  opacityValue.textContent = `${opacity}%`;
+  localStorage.setItem("naver_minimal_bg_opacity", opacity);
+  applyBackgroundSettings(bgColorInput.value, opacity, localStorage.getItem("naver_minimal_bg_image"));
+});
+
+bgImageInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    const imageData = event.target.result;
+    localStorage.setItem("naver_minimal_bg_image", imageData);
+    applyBackgroundSettings(bgColorInput.value, bgOpacitySlider.value, imageData);
+  };
+  reader.readAsDataURL(file);
+});
+
+clearBgBtn.addEventListener("click", () => {
+  localStorage.removeItem("naver_minimal_bg_image");
+  bgImageInput.value = "";
+  applyBackgroundSettings(bgColorInput.value, bgOpacitySlider.value, null);
+});
+
+/* =========================================================
+   설정 패널 토글
+   ========================================================= */
+
+settingsToggle.addEventListener("click", () => {
+  settingsPanel.classList.add("active");
+});
+
+settingsClose.addEventListener("click", () => {
+  settingsPanel.classList.remove("active");
+});
+
+// 패널 외부 클릭 시 닫기
+document.addEventListener("click", (e) => {
+  if (!settingsPanel.contains(e.target) && !settingsToggle.contains(e.target)) {
+    settingsPanel.classList.remove("active");
+  }
+});
+
+/* =========================================================
+   검색 폼
+   ========================================================= */
 
 function updateClearButton() {
   clearButton.hidden = queryInput.value.length === 0;
@@ -150,7 +527,7 @@ async function fetchWeather(lat, lon, cityName) {
 }
 
 function initWeather() {
-  const CACHE_DURATION = 25 * 60 * 1000; // 25분 캐시
+  const CACHE_DURATION = 25 * 60 * 1000;
   const cached = localStorage.getItem("naver_minimal_weather");
   let hasValidCache = false;
 
@@ -176,7 +553,6 @@ function initWeather() {
         fetchWeather(latitude, longitude, cityName);
       },
       () => {
-        // 위치 권한 거부 또는 실패 시 기본 서울 좌표 사용
         fetchWeather(37.5665, 126.9780, "서울");
       },
       { timeout: 6000, maximumAge: 600000 }
@@ -186,9 +562,30 @@ function initWeather() {
   }
 }
 
-updateDateTime();
-setInterval(updateDateTime, 1000);
-updateClearButton();
+/* =========================================================
+   초기화 및 시작
+   ========================================================= */
 
-initWeather();
-setInterval(initWeather, 20 * 60 * 1000);
+function init() {
+  // 언어 초기화 및 활성 버튼 표시
+  langButtons.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.lang === currentLanguage);
+  });
+
+  // 배경 설정 로드
+  loadBackgroundSettings();
+
+  // 시간, 날짜, 응원문구 업데이트
+  updateDateTime();
+  setInterval(updateDateTime, 1000);
+  updateDailyMessage();
+
+  // 검색 폼 초기화
+  updateClearButton();
+
+  // 날씨 초기화
+  initWeather();
+  setInterval(initWeather, 20 * 60 * 1000);
+}
+
+init();

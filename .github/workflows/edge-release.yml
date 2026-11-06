@@ -7,7 +7,7 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   publish:
@@ -17,6 +17,43 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 1. manifest.json 버전 자동 증가
+      - name: Bump manifest version
+        run: |
+          python3 - <<'PY'
+          import json
+
+          path = "manifest.json"
+
+          with open(path, "r", encoding="utf-8") as f:
+              manifest = json.load(f)
+
+          version = manifest["version"]
+          parts = version.split(".")
+
+          parts[-1] = str(int(parts[-1]) + 1)
+          new_version = ".".join(parts)
+
+          manifest["version"] = new_version
+
+          with open(path, "w", encoding="utf-8") as f:
+              json.dump(manifest, f, indent=2, ensure_ascii=False)
+              f.write("\n")
+
+          print(f"Version: {version} -> {new_version}")
+          PY
+
+      # 2. 변경된 manifest.json GitHub에 반영
+      - name: Commit version update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add manifest.json
+          git commit -m "chore: bump extension version" || exit 0
+          git push
+
+      # 3. 확장 프로그램 ZIP 생성
       - name: Create extension ZIP
         run: |
           mkdir -p release
@@ -27,11 +64,12 @@ jobs:
                "README.md" \
                "*.md"
 
+      # 4. Edge Add-ons 스토어 업데이트 제출
       - name: Publish to Microsoft Edge Add-ons
         uses: wdzeng/edge-addon@v2
         with:
           product-id: ${{ secrets.EDGE_PRODUCT_ID }}
           zip-path: release/edge-extension.zip
-          api-key: ${{ secrets.EDGE_API_KEY }}
+          api-key: ${{ secrets.RICOCHET_SECRET }}
           client-id: ${{ secrets.EDGE_CLIENT_ID }}
           notes-for-certification: "Automated update via GitHub Actions"
