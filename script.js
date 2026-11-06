@@ -269,6 +269,30 @@ function updateDailyMessage() {
    언어 변경
    ========================================================= */
 
+function updateUITexts() {
+  // Settings 패널 텍스트
+  document.getElementById("settingsTitle").textContent = t("settings");
+  document.getElementById("langLabel").textContent = t("language");
+  document.getElementById("bgColorLabel").textContent = t("bgColor");
+  document.getElementById("bgOpacityLabel").textContent = t("bgOpacity");
+  document.getElementById("bgImageLabel").textContent = t("bgImage");
+  clearBgBtn.textContent = t("clearImage");
+  clearButton.setAttribute("aria-label", t("clearImage"));
+  settingsToggle.setAttribute("aria-label", t("settings"));
+
+  // 서비스 링크 라벨 및 title 업데이트
+  const serviceLinks = document.querySelectorAll(".service-item");
+  const services = ["mail", "cafe", "blog", "mybox", "shopping", "news", "map", "webtoon"];
+  serviceLinks.forEach((link, i) => {
+    if (i < services.length) {
+      const name = link.querySelector(".service-name");
+      const serviceName = t(services[i]);
+      if (name) name.textContent = serviceName;
+      link.setAttribute("title", serviceName);
+    }
+  });
+}
+
 function setLanguage(lang) {
   currentLanguage = lang;
   localStorage.setItem("naver_minimal_lang", lang);
@@ -279,24 +303,7 @@ function setLanguage(lang) {
   });
 
   // UI 텍스트 업데이트
-  document.getElementById("settingsTitle").textContent = t("settings");
-  document.getElementById("langLabel").textContent = t("language");
-  document.getElementById("bgColorLabel").textContent = t("bgColor");
-  document.getElementById("bgOpacityLabel").textContent = t("bgOpacity");
-  document.getElementById("bgImageLabel").textContent = t("bgImage");
-  clearBgBtn.textContent = t("clearImage");
-  clearButton.setAttribute("aria-label", `${t("clearImage")} ${t("enterSearch").toLowerCase()}`);
-  settingsToggle.setAttribute("aria-label", t("settings"));
-
-  // 서비스 링크 라벨 업데이트
-  const serviceLinks = document.querySelectorAll(".service-item");
-  const services = ["mail", "cafe", "blog", "mybox", "shopping", "news", "map", "webtoon"];
-  serviceLinks.forEach((link, i) => {
-    if (i < services.length) {
-      const name = link.querySelector(".service-name");
-      if (name) name.textContent = t(services[i]);
-    }
-  });
+  updateUITexts();
 
   // 날짜 및 응원문구 업데이트
   updateDateTime();
@@ -571,6 +578,9 @@ function init() {
   langButtons.forEach(btn => {
     btn.classList.toggle("active", btn.dataset.lang === currentLanguage);
   });
+
+  // 저장된 언어로 UI 텍스트 업데이트
+  updateUITexts();
 
   // 배경 설정 로드
   loadBackgroundSettings();
