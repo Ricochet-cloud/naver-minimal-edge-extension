@@ -1,0 +1,37 @@
+
+name: Publish Edge Extension
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create extension ZIP
+        run: |
+          mkdir -p release
+          zip -r release/edge-extension.zip . \
+            -x ".git/*" \
+               ".github/*" \
+               "release/*" \
+               "README.md" \
+               "*.md"
+
+      - name: Publish to Microsoft Edge Add-ons
+        uses: wdzeng/edge-addon@v2
+        with:
+          product-id: ${{ secrets.EDGE_PRODUCT_ID }}
+          zip-path: release/edge-extension.zip
+          api-key: ${{ secrets.EDGE_API_KEY }}
+          client-id: ${{ secrets.EDGE_CLIENT_ID }}
+          notes-for-certification: "Automated update via GitHub Actions"
