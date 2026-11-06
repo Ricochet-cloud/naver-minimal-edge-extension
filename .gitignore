@@ -1,0 +1,9 @@
+# 브라우저가 확장 로드 시 자동 생성하는 폴더
+_metadata/
+
+# OS / 에디터 파일
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
