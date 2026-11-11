@@ -44,6 +44,54 @@
       <input type="file" id="bgImageInput" class="file-input" accept="image/*">
       <button class="btn-clear-bg" id="clearBgBtn" type="button" aria-label="Clear background image">Clear Image</button>
     </div>
+
+    <div class="settings-divider"></div>
+
+    <div class="settings-section">
+      <label id="fontLabel">Clock Font</label>
+      <div class="font-buttons">
+        <button class="font-btn" data-font="inter" title="Inter">Inter</button>
+        <button class="font-btn" data-font="georgia" title="Georgia">Georgia</button>
+        <button class="font-btn" data-font="playfair" title="Playfair Display">Playfair</button>
+        <button class="font-btn" data-font="poppins" title="Poppins">Poppins</button>
+        <button class="font-btn" data-font="courier" title="Courier New">Courier</button>
+        <button class="font-btn" data-font="roboto-mono" title="Roboto Mono">RobotoMono</button>
+        <button class="font-btn" data-font="space-mono" title="Space Mono">SpaceMono</button>
+        <button class="font-btn" data-font="outfit" title="Outfit">Outfit</button>
+        <button class="font-btn" data-font="times" title="Times New Roman">Times</button>
+        <button class="font-btn" data-font="syne" title="Syne">Syne</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <label id="timeFormatLabel">Time Format</label>
+      <div class="time-format-buttons">
+        <button class="format-btn active" data-format="24h">24H (13:45)</button>
+        <button class="format-btn" data-format="12h">12H (1:45 PM)</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <label id="colorCustomLabel">Text Colors</label>
+      <div class="color-customization">
+        <div class="color-row">
+          <label id="clockColorLabel">Clock</label>
+          <input type="color" id="clockColorInput" class="color-input-small">
+        </div>
+        <div class="color-row">
+          <label id="dateColorLabel">Date</label>
+          <input type="color" id="dateColorInput" class="color-input-small">
+        </div>
+        <div class="color-row">
+          <label id="messageColorLabel">Message</label>
+          <input type="color" id="messageColorInput" class="color-input-small">
+        </div>
+        <div class="color-row">
+          <label id="serviceColorLabel">Services</label>
+          <input type="color" id="serviceColorInput" class="color-input-small">
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- 설정 버튼들 (우측 상단) -->
@@ -59,7 +107,10 @@
 
   <main class="page">
     <section class="search-area" aria-label="네이버 검색">
-      <div class="clock" id="clock">00:00</div>
+      <div class="clock-wrapper">
+        <span class="am-pm" id="ampm"></span>
+        <div class="clock" id="clock">00:00</div>
+      </div>
       
       <div class="meta-row">
         <div class="date" id="date"></div>

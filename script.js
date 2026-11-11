@@ -10,6 +10,13 @@ const i18n = {
     bgOpacity: "배경 투명도",
     bgImage: "배경 이미지",
     clearImage: "이미지 제거",
+    font: "시간 폰트",
+    textColors: "텍스트 색상",
+    clockColor: "시간",
+    dateColor: "날짜",
+    messageColor: "응원문구",
+    serviceColor: "서비스",
+    timeFormat: "시간 형식",
     weather: "날씨",
     enterSearch: "검색",
     mail: "메일",
@@ -50,6 +57,13 @@ const i18n = {
     bgOpacity: "Background Opacity",
     bgImage: "Background Image",
     clearImage: "Clear Image",
+    font: "Clock Font",
+    textColors: "Text Colors",
+    clockColor: "Clock",
+    dateColor: "Date",
+    messageColor: "Message",
+    serviceColor: "Services",
+    timeFormat: "Time Format",
     weather: "Weather",
     enterSearch: "Search",
     mail: "Mail",
@@ -90,6 +104,13 @@ const i18n = {
     bgOpacity: "背景の透明度",
     bgImage: "背景画像",
     clearImage: "画像を削除",
+    font: "時間フォント",
+    textColors: "テキストの色",
+    clockColor: "時間",
+    dateColor: "日付",
+    messageColor: "メッセージ",
+    serviceColor: "サービス",
+    timeFormat: "時間形式",
     weather: "天気",
     enterSearch: "検索",
     mail: "メール",
@@ -130,6 +151,13 @@ const i18n = {
     bgOpacity: "背景不透明度",
     bgImage: "背景图像",
     clearImage: "清除图像",
+    font: "时钟字体",
+    textColors: "文字颜色",
+    clockColor: "时间",
+    dateColor: "日期",
+    messageColor: "消息",
+    serviceColor: "服务",
+    timeFormat: "时间格式",
     weather: "天气",
     enterSearch: "搜索",
     mail: "邮件",
@@ -176,6 +204,7 @@ function t(key) {
 }
 
 const clockElement = document.getElementById("clock");
+const ampmElement = document.getElementById("ampm");
 const dateElement = document.getElementById("date");
 const queryInput = document.getElementById("query");
 const clearButton = document.getElementById("clearButton");
@@ -198,11 +227,31 @@ const bgImageInput = document.getElementById("bgImageInput");
 const clearBgBtn = document.getElementById("clearBgBtn");
 const bodyElement = document.getElementById("bodyElement");
 
+const fontButtons = document.querySelectorAll(".font-btn");
+const formatButtons = document.querySelectorAll(".format-btn");
+const clockColorInput = document.getElementById("clockColorInput");
+const dateColorInput = document.getElementById("dateColorInput");
+const messageColorInput = document.getElementById("messageColorInput");
+const serviceColorInput = document.getElementById("serviceColorInput");
+
 const weekdays = {
   ko: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
   en: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
   ja: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],
   zh: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
+};
+
+const fontMap = {
+  inter: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  georgia: '"Georgia", serif',
+  playfair: '"Playfair Display", serif',
+  poppins: '"Poppins", sans-serif',
+  courier: '"Courier New", monospace',
+  "roboto-mono": '"Roboto Mono", monospace',
+  "space-mono": '"Space Mono", monospace',
+  outfit: '"Outfit", sans-serif',
+  times: '"Times New Roman", serif',
+  syne: '"Syne", sans-serif'
 };
 
 /* =========================================================
@@ -231,11 +280,25 @@ function getDateString(date, lang) {
 
 function updateDateTime() {
   const now = new Date();
-  clockElement.textContent = new Intl.DateTimeFormat(currentLanguage === "ko" ? "ko-KR" :
-    currentLanguage === "en" ? "en-US" :
-    currentLanguage === "ja" ? "ja-JP" : "zh-CN", {
-    hour: "2-digit", minute: "2-digit", hour12: false
-  }).format(now);
+  const timeFormat = localStorage.getItem("naver_minimal_time_format") || "24h";
+
+  if (timeFormat === "12h") {
+    const hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    const displayHours = hours % 12 || 12;
+
+    clockElement.textContent = `${displayHours}:${minutes}`;
+    ampmElement.textContent = ampm;
+  } else {
+    clockElement.textContent = new Intl.DateTimeFormat(currentLanguage === "ko" ? "ko-KR" :
+      currentLanguage === "en" ? "en-US" :
+      currentLanguage === "ja" ? "ja-JP" : "zh-CN", {
+      hour: "2-digit", minute: "2-digit", hour12: false
+    }).format(now);
+    ampmElement.textContent = '';
+  }
+
   dateElement.textContent = getDateString(now, currentLanguage);
 }
 
@@ -276,6 +339,13 @@ function updateUITexts() {
   document.getElementById("bgColorLabel").textContent = t("bgColor");
   document.getElementById("bgOpacityLabel").textContent = t("bgOpacity");
   document.getElementById("bgImageLabel").textContent = t("bgImage");
+  document.getElementById("fontLabel").textContent = t("font");
+  document.getElementById("colorCustomLabel").textContent = t("textColors");
+  document.getElementById("clockColorLabel").textContent = t("clockColor");
+  document.getElementById("dateColorLabel").textContent = t("dateColor");
+  document.getElementById("messageColorLabel").textContent = t("messageColor");
+  document.getElementById("serviceColorLabel").textContent = t("serviceColor");
+  document.getElementById("timeFormatLabel").textContent = t("timeFormat");
   clearBgBtn.textContent = t("clearImage");
   clearButton.setAttribute("aria-label", t("clearImage"));
   settingsToggle.setAttribute("aria-label", t("settings"));
@@ -315,6 +385,124 @@ function setLanguage(lang) {
 
 langButtons.forEach(btn => {
   btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+});
+
+/* =========================================================
+   폰트 및 색상 커스텀
+   ========================================================= */
+
+function loadFontAndColorSettings() {
+  const clockFont = localStorage.getItem("naver_minimal_clock_font") || "inter";
+  const clockColor = localStorage.getItem("naver_minimal_clock_color") || "#f2f3f5";
+  const dateColor = localStorage.getItem("naver_minimal_date_color") || "#858994";
+  const messageColor = localStorage.getItem("naver_minimal_message_color") || "#03c75a";
+  const serviceColor = localStorage.getItem("naver_minimal_service_color") || "#a2a6b0";
+  const timeFormat = localStorage.getItem("naver_minimal_time_format") || "24h";
+
+  // 폰트 버튼 활성화
+  fontButtons.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.font === clockFont);
+  });
+
+  // 시간 형식 버튼 활성화
+  formatButtons.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.format === timeFormat);
+  });
+
+  // 색상 입력값 설정
+  clockColorInput.value = clockColor;
+  dateColorInput.value = dateColor;
+  messageColorInput.value = messageColor;
+  serviceColorInput.value = serviceColor;
+
+  // 적용
+  applyFontAndColors(clockFont, clockColor, dateColor, messageColor, serviceColor);
+}
+
+function applyFontAndColors(clockFont, clockColor, dateColor, messageColor, serviceColor) {
+  // 폰트 적용
+  const fontFamily = fontMap[clockFont] || fontMap.inter;
+  clockElement.style.fontFamily = fontFamily;
+
+  // 색상 적용
+  clockElement.style.color = clockColor;
+  dateElement.style.color = dateColor;
+  dailyMessageElement.style.color = messageColor;
+
+  const serviceItems = document.querySelectorAll(".service-name");
+  serviceItems.forEach(item => {
+    item.style.color = serviceColor;
+  });
+}
+
+function setFont(font) {
+  localStorage.setItem("naver_minimal_clock_font", font);
+  fontButtons.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.font === font);
+  });
+
+  const clockColor = localStorage.getItem("naver_minimal_clock_color") || "#f2f3f5";
+  const dateColor = localStorage.getItem("naver_minimal_date_color") || "#858994";
+  const messageColor = localStorage.getItem("naver_minimal_message_color") || "#03c75a";
+  const serviceColor = localStorage.getItem("naver_minimal_service_color") || "#a2a6b0";
+
+  applyFontAndColors(font, clockColor, dateColor, messageColor, serviceColor);
+}
+
+fontButtons.forEach(btn => {
+  btn.addEventListener("click", () => setFont(btn.dataset.font));
+});
+
+function setTimeFormat(format) {
+  localStorage.setItem("naver_minimal_time_format", format);
+  formatButtons.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.format === format);
+  });
+  updateDateTime();
+}
+
+formatButtons.forEach(btn => {
+  btn.addEventListener("click", () => setTimeFormat(btn.dataset.format));
+});
+
+clockColorInput.addEventListener("change", (e) => {
+  const color = e.target.value;
+  localStorage.setItem("naver_minimal_clock_color", color);
+  const clockFont = localStorage.getItem("naver_minimal_clock_font") || "inter";
+  const dateColor = localStorage.getItem("naver_minimal_date_color") || "#858994";
+  const messageColor = localStorage.getItem("naver_minimal_message_color") || "#03c75a";
+  const serviceColor = localStorage.getItem("naver_minimal_service_color") || "#a2a6b0";
+  applyFontAndColors(clockFont, color, dateColor, messageColor, serviceColor);
+});
+
+dateColorInput.addEventListener("change", (e) => {
+  const color = e.target.value;
+  localStorage.setItem("naver_minimal_date_color", color);
+  const clockFont = localStorage.getItem("naver_minimal_clock_font") || "inter";
+  const clockColor = localStorage.getItem("naver_minimal_clock_color") || "#f2f3f5";
+  const messageColor = localStorage.getItem("naver_minimal_message_color") || "#03c75a";
+  const serviceColor = localStorage.getItem("naver_minimal_service_color") || "#a2a6b0";
+  applyFontAndColors(clockFont, clockColor, color, messageColor, serviceColor);
+});
+
+messageColorInput.addEventListener("change", (e) => {
+  const color = e.target.value;
+  localStorage.setItem("naver_minimal_message_color", color);
+  const clockFont = localStorage.getItem("naver_minimal_clock_font") || "inter";
+  const clockColor = localStorage.getItem("naver_minimal_clock_color") || "#f2f3f5";
+  const dateColor = localStorage.getItem("naver_minimal_date_color") || "#858994";
+  const serviceColor = localStorage.getItem("naver_minimal_service_color") || "#a2a6b0";
+  applyFontAndColors(clockFont, clockColor, dateColor, color, serviceColor);
+});
+
+serviceColorInput.addEventListener("change", (e) => {
+  const color = e.target.value;
+  localStorage.setItem("naver_minimal_service_color", color);
+  const clockFont = localStorage.getItem("naver_minimal_clock_font") || "inter";
+  const clockColor = localStorage.getItem("naver_minimal_clock_color") || "#f2f3f5";
+  const dateColor = localStorage.getItem("naver_minimal_date_color") || "#858994";
+  const messageColor = localStorage.getItem("naver_minimal_message_color") || "#03c75a";
+  applyFontAndColors(clockFont, clockColor, dateColor, messageColor, color);
 });
 
 /* =========================================================
@@ -584,6 +772,9 @@ function init() {
 
   // 배경 설정 로드
   loadBackgroundSettings();
+
+  // 폰트 및 색상 설정 로드
+  loadFontAndColorSettings();
 
   // 시간, 날짜, 응원문구 업데이트
   updateDateTime();

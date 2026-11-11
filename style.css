@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600&family=Playfair+Display:wght@400;600&family=Poppins:wght@400;500;600&family=Roboto+Mono:wght@400;500&family=Space+Mono:wght@400;700&family=Outfit:wght@400;500;600&family=Syne:wght@400;600;700&display=swap');
 
 :root {
   color-scheme: dark;
@@ -65,12 +65,31 @@ body::before {
   transform: translateY(-2vh);
 }
 
+.clock-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .clock {
   font-size: clamp(58px, 10vw, 88px);
   line-height: 1;
   font-weight: 500;
   letter-spacing: -5px;
   font-variant-numeric: tabular-nums;
+}
+
+.am-pm {
+  position: absolute;
+  bottom: 8px;
+  right: 2px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  font-variant-numeric: normal;
+  min-width: 18px;
 }
 
 /* 날짜 및 날씨 영역 */
@@ -470,6 +489,106 @@ kbd {
   background: var(--surface-hover);
 }
 
+/* 폰트 선택 버튼 */
+.font-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.font-btn {
+  padding: 10px 12px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.font-btn:hover {
+  color: var(--text);
+  border-color: rgba(3, 199, 90, 0.3);
+}
+
+.font-btn.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+/* 시간 형식 선택 */
+.time-format-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.format-btn {
+  padding: 10px 12px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.format-btn:hover {
+  color: var(--text);
+  border-color: rgba(3, 199, 90, 0.3);
+}
+
+.format-btn.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+/* 설정 섹션 구분선 */
+.settings-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* 색상 커스텀 */
+.color-customization {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.color-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.color-row label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+  flex: 1;
+}
+
+.color-input-small {
+  width: 48px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--surface-hover);
+  flex-shrink: 0;
+}
+
 /* 불투명도 조절 */
 .opacity-control {
   display: flex;
@@ -614,6 +733,12 @@ kbd {
   }
   .clock {
     letter-spacing: -3px;
+  }
+
+  .am-pm {
+    font-size: 10px;
+    bottom: 6px;
+    right: 1px;
   }
   .meta-row {
     margin-top: 13px;
